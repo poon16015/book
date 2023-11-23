@@ -18,7 +18,22 @@ func SetupDatabase() {
   
 	database.AutoMigrate(
 	 &Member{},
-
+	 &Room{},
+	 &Admin{},
+	 &Room_type{},
+	 &Room_status{},
+	 &Room_booking{},
+	 &Rewards{},
+	 &Rewards_history{},
+	 &Point_history{},
+	 &Donate_book{},
+	 &Book_status{},
+	 &Book_request{},
+	 &Catagory{},
+	 &Book{},
+	 &Borrow_status{},
+	 &Borrow_book{},
+	 &Review{},
 	)
 	db = database
   
