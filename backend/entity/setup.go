@@ -34,6 +34,7 @@ func SetupDatabase() {
 	 &Borrow_status{},
 	 &Borrow_book{},
 	 &Review{},
+	 &Rewards_catagory{},
 	)
 	db = database
   
