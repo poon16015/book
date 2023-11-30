@@ -27,7 +27,7 @@ func SetupDatabase() {
 	 &Rewards_history{},
 	 &Point_history{},
 	 &Donate_book{},
-	 &Book_status{},
+	 &BookStatus{},
 	 &Book_request{},
 	 &Catagory{},
 	 &Book{},
@@ -37,6 +37,10 @@ func SetupDatabase() {
 	 &Rewards_catagory{},
 	)
 	db = database
+
+	// db.Model(&Catagory{
+	// 	Name: "Good",
+	// })
   
 	
   }

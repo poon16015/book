@@ -6,6 +6,16 @@ import (
 	"time"
 )
 
+// type Prefixes struct {
+// 	gorm.Model
+// 	Name string
+// }
+
+// type Genders struct {
+// 	gorm.Model
+// 	Name string
+// }
+
 type Member struct {
 	gorm.Model
 	FirstName string
@@ -14,7 +24,8 @@ type Member struct {
 	Email     string `gorm:"uniqueIndex"`
 	Password  string
 	Point     float32
-
+	// GenderID  uint
+	// PrefixID  uint
 	Review          []Review          `gorm:"foreignKey:Member_id"`
 	Borrow_book     []Borrow_book     `gorm:"foreignKey:Member_id"`
 	Rewards_history []Rewards_history `gorm:"foreignKey:Member_id"`
@@ -93,7 +104,7 @@ type Rewards struct {
 	Point_to_paid   int
 	Rewards_stock   int
 
-	Rewards_cat_id   *uint     // fk
+	Rewards_cat_id   *uint            // fk
 	Rewards_catagory Rewards_catagory `gorm:"references:id"`
 
 	Rewards_history []Rewards_history `gorm:"foreignKey:Rewards_id"`
@@ -106,7 +117,6 @@ type Rewards_catagory struct {
 	Rewards []Rewards `gorm:"foreignKey:Rewards_cat_id"`
 }
 
-
 type Point_history struct {
 	gorm.Model
 	Point  int
@@ -118,52 +128,56 @@ type Point_history struct {
 	Borrow_book_id *uint       //fk
 	Borrow_book    Borrow_book `gorm:"references:id"`
 
-	Room_booking_id *uint //fk
+	Room_booking_id *uint        //fk
 	Room_booking    Room_booking `gorm:"references:id"`
 
-	Donate_book_id *uint //fk
+	Donate_book_id *uint       //fk
 	Donate_book    Donate_book `gorm:"references:id"`
 }
+
 type Donate_book struct {
 	gorm.Model
 	DonateBook_title string
 	Donate_point     int
 
-	Member_id *uint  //fk
+	Member_id uint   //fk
 	Member    Member `gorm:"references:id"`
 
-	Catagory_id *uint  //fk
-	Catagory Catagory `gorm:"references:id"`
+	Catagory_id uint     //fk
+	Catagory    Catagory `gorm:"references:id"`
 
 	Point_history []Point_history `gorm:"foreignKey:Donate_book_id"`
 }
-type Book_status struct {
+
+type BookStatus struct {
 	gorm.Model
-	Status_name string 
+	StatusName string
 
 	Book_request []Book_request `gorm:"foreignKey:Book_status_id"`
 }
+
 type Book_request struct {
 	gorm.Model
-	BookRequest_title      string
-	BookRequest_reason     string
+	BookRequest_title  string
+	BookRequest_reason string
 
 	Member_id *uint  //fk
 	Member    Member `gorm:"references:id"`
 
-	Catagory_id *uint  //fk
-	Catagory Catagory `gorm:"references:id"`
+	Catagory_id *uint    //fk
+	Catagory    Catagory `gorm:"references:id"`
 
-	Book_status_id *uint  //fk
-	Book_status Book_status `gorm:"references:id"`
+	Book_status_id *uint       //fk
+	Book_status    Book_status `gorm:"references:id"`
 }
+
 type Catagory struct {
 	gorm.Model
-	Cat_name string
+	Name string
 
-	Book []Book `gorm:"foreignKey:Catagory_id"`
+	Book         []Book         `gorm:"foreignKey:Catagory_id"`
 	Book_request []Book_request `gorm:"foreignKey:Catagory_id"`
-	Donate_book []Donate_book `gorm:"foreignKey:Catagory_id"`
+	Donate_book  []Donate_book  `gorm:"foreignKey:Catagory_id"`
 }
 type Book struct {
 	gorm.Model
@@ -173,7 +187,7 @@ type Book struct {
 	Image_src        string
 	TotalBook        int
 
-	Review      []Review      `gorm:"foreignKey:Book_id"`
+	Review []Review `gorm:"foreignKey:Book_id"`
 	Borrow_book []Borrow_book `gorm:"foreignKey:Book_id"`
 
 	Catagory_id *uint
@@ -195,11 +209,11 @@ type Borrow_book struct {
 	Borrow_status_id int           //fk
 	Borrow_status    Borrow_status `gorm:"references:id"`
 
-	Member_id *uint  //fk
-	Member    Member `gorm:"references:id"`
+	Member_id uint    //fk
+	Member    *Member `gorm:"references:id"`
 
-	Book_id *uint //fk
-	Book    Book  `gorm:"references:id"`
+	Book_id uint  //fk
+	Book    *Book `gorm:"references:id"`
 
 	Point_history []Point_history `gorm:"foreignKey:Borrow_book_id"`
 }
@@ -208,9 +222,9 @@ type Review struct {
 	Rate    string
 	Comment string
 
-	Book_id *uint //fk
-	Book    Book  `gorm:"references:id"`
+	Book_id uint  //fk
+	Book    *Book `gorm:"references:id"`
 
-	Member_id *uint  //fk
-	Member    Member `gorm:"references:id"`
+	Member_id uint    //fk
+	Member    *Member `gorm:"references:id"`
 }
