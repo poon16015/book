@@ -153,7 +153,7 @@ type BookStatus struct {
 	gorm.Model
 	StatusName string
 
-	Book_request []Book_request `gorm:"foreignKey:Book_status_id"`
+	Book_request []Book_request `gorm:"foreignKey:BookStatus_id"`
 }
 
 type Book_request struct {
@@ -167,8 +167,8 @@ type Book_request struct {
 	Catagory_id *uint    //fk
 	Catagory    Catagory `gorm:"references:id"`
 
-	Book_status_id *uint       //fk
-	Book_status    Book_status `gorm:"references:id"`
+	BookStatus_id *uint       //fk
+	BookStatus    BookStatus `gorm:"references:id"`
 }
 
 type Catagory struct {

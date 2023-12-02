@@ -37,7 +37,7 @@ func SetupDatabase() {
 	 &Rewards_catagory{},
 	)
 	db = database
-
+	//MockupAdmin()
 	// db.Model(&Catagory{
 	// 	Name: "Good",
 	// })
